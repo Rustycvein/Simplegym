@@ -27,7 +27,7 @@ function App() {
     setToken(token);
     setCurrentUser(user);
     setAuthPage(null);
-    // Cargar rutinas del servidor tras login
+    
     setTimeout(loadRoutinesFromServer, 100);
   };
 
@@ -84,12 +84,10 @@ function App() {
     fetchCatalog();
   }, []);
 
-  // ── Cargar rutinas desde IndexedDB al iniciar ────────────────
   useEffect(() => {
     getRoutines().then(setRoutines).catch(console.error);
   }, []);
 
-  // ── Pending count ────────────────────────────────────────────
   const refreshPendingCount = useCallback(async () => {
     const count = await getPendingCount();
     setPendingCount(count);
@@ -99,7 +97,6 @@ function App() {
     refreshPendingCount();
   }, [refreshPendingCount]);
 
-  // ── Detectar online/offline y auto-sync ──────────────────────
   useEffect(() => {
     const handleOnline = async () => {
       setIsOnline(true);
@@ -117,7 +114,6 @@ function App() {
     };
   }, [refreshPendingCount]);
 
-  // ── Sync manual ──────────────────────────────────────────────
   const handleManualSync = async () => {
     if (!isOnline || syncing) return;
     setSyncing(true);
@@ -126,7 +122,6 @@ function App() {
     setSyncing(false);
   };
 
-  // ── Filtros catálogo ─────────────────────────────────────────
   const filteredCatalog = catalog.filter(item => {
     const query = searchTerm.toLowerCase();
     const nameES = typeof item.name === 'object' ? item.name.es?.toLowerCase() : item.name?.toLowerCase();
@@ -143,7 +138,6 @@ function App() {
     return nameES?.includes(query) || nameEN?.includes(query) || aliasMatch;
   });
 
-  // ── Workout actual ───────────────────────────────────────────
   const addToWorkout = (exercise) => {
     const exerciseId = exercise.id || exercise._id;
     if (exercises.find(ex => (ex.id || ex._id) === exerciseId)) {
@@ -184,7 +178,6 @@ function App() {
   const completedCount = exercises.filter(ex => ex.sets.some(s => s.weight && s.reps)).length;
   const progressPercentage = exercises.length > 0 ? (completedCount / exercises.length) * 100 : 0;
 
-  // ── Limpiar IndexedDB al cerrar sesión ──────────────────────
   const clearLocalData = async () => {
     const db = await openDB();
     await new Promise((res, rej) => {
@@ -196,7 +189,6 @@ function App() {
     });
   };
 
-  // ── Cargar rutinas del servidor al iniciar sesión ────────────
   const loadRoutinesFromServer = async () => {
     try {
       const res = await fetch(`${API_URL}/api/routines`, {
@@ -216,7 +208,6 @@ function App() {
     }
   };
 
-  // ── Finalizar → guarda en IndexedDB, sync en background ──────
   const finishWorkout = async () => {
     if (exercises.length === 0) return;
     setSaving(true);
@@ -262,7 +253,6 @@ function App() {
     }
   };
 
-  // ── RUTINAS ──────────────────────────────────────────────────
   const openNewRoutine = () => {
     setEditingRoutine(null);
     setRoutineName("");
@@ -330,7 +320,6 @@ function App() {
     setRoutineExercises(prev => prev.filter(ex => (ex.id || ex._id) !== exerciseId));
   };
 
-  // ── Historial desde IndexedDB ────────────────────────────────
   const openHistory = async () => {
     setShowHistory(true);
     setHistoryLoading(true);
@@ -344,7 +333,6 @@ function App() {
     }
   };
 
-  // ── Auth guard ──────────────────────────────────────────────
   if (authPage === 'login') return <Login onSuccess={handleAuthSuccess} goToRegister={() => setAuthPage('register')} />;
   if (authPage === 'register') return <Register onSuccess={handleAuthSuccess} goToLogin={() => setAuthPage('login')} />;
 
@@ -394,7 +382,6 @@ function App() {
         <ActionButton icon={<Clock size={16}/>} label="Historial" onClick={openHistory} />
       </div>
 
-      {/* ENTRENAMIENTO ACTIVO */}
       <div className="space-y-6">
         {exercises.length === 0 ? (
           <div className="py-20 text-center border-2 border-dashed border-zinc-900 rounded-3xl">
@@ -443,7 +430,7 @@ function App() {
         )}
       </div>
 
-      {/* ── MODAL CATÁLOGO WORKOUT ────────────────────────────────── */}
+      
       {showCatalog && (
         <div className="fixed inset-0 bg-black/98 z-[110] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
@@ -486,7 +473,7 @@ function App() {
         </div>
       )}
 
-      {/* ── MODAL RUTINAS ─────────────────────────────────────────── */}
+      
       {showRoutines && !creatingRoutine && (
         <div className="fixed inset-0 bg-black/98 z-[110] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
@@ -556,7 +543,6 @@ function App() {
         </div>
       )}
 
-      {/* ── MODAL CREAR / EDITAR RUTINA ───────────────────────────── */}
       {showRoutines && creatingRoutine && (
         <div className="fixed inset-0 bg-black/98 z-[120] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
@@ -612,7 +598,6 @@ function App() {
         </div>
       )}
 
-      {/* ── MODAL CATÁLOGO PARA RUTINA ────────────────────────────── */}
       {showRoutineCatalog && (
         <div className="fixed inset-0 bg-black/98 z-[130] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
@@ -660,7 +645,6 @@ function App() {
         </div>
       )}
 
-      {/* ── MODAL HISTORIAL ──────────────────────────────────────── */}
       {showHistory && (
         <div className="fixed inset-0 bg-black/98 z-[110] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
