@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: SimpleGym API
+  version: 1.0.0
+  description: API for SimpleGym offline-first synchronization.
+
+servers:
+  - url: https://api.simplegym.com
+    description: Production server
+
+paths:
+  /sync:
+    post:
+      summary: Push local changes to the server
+      description: Receives unsynced entities from the client.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncRequest'
+      responses:
+        '200':
+          description: Changes processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+
+    get:
+      summary: Pull remote changes from the server
+      parameters:
+        - in: query
+          name: lastSync
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: List of updated entities since last sync
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+
+components:
+  schemas:
+
+    SyncRequest:
+      type: object
+      properties:
+        routines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Routine'
+        exercises:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exercise'
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkoutSession'
+        sets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Set'
+
+    SyncResponse:
+      type: object
+      properties:
+        routines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Routine'
+        exercises:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exercise'
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkoutSession'
+        sets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Set'
+        serverTime:
+          type: string
+          format: date-time
+
+    BaseEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    Routine:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            name:
+              type: string
+            day:
+              type: string
+
+    Exercise:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            name:
+              type: string
+            muscleGroup:
+              type: string
+
+    WorkoutSession:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            routineId:
+              type: string
+              format: uuid
+            date:
+              type: string
+              format: date-time
+
+    Set:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            sessionId:
+              type: string
+              format: uuid
+            exerciseId:
+              type: string
+              format: uuid
+            reps:
+              type: integer
+            weight:
+              type: number
+              format: float

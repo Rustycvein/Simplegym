@@ -1,0 +1,307 @@
+{
+  "exercises": [
+
+    {
+      "id": "bench_press",
+      "name": { "es": "Press de banca", "en": "Bench Press" },
+      "muscle_group": "chest",
+      "equipment": "barbell",
+      "aliases": ["bench press", "press banca", "press de banca", "barbell bench press"]
+    },
+    {
+      "id": "incline_bench_press",
+      "name": { "es": "Press de banca inclinado", "en": "Incline Bench Press" },
+      "muscle_group": "chest",
+      "equipment": "barbell",
+      "aliases": ["incline bench press", "press inclinado", "press banca inclinado"]
+    },
+    {
+      "id": "decline_bench_press",
+      "name": { "es": "Press de banca declinado", "en": "Decline Bench Press" },
+      "muscle_group": "chest",
+      "equipment": "barbell",
+      "aliases": ["decline bench press", "press declinado", "press banca declinado"]
+    },
+    {
+      "id": "dumbbell_bench_press",
+      "name": { "es": "Press de banca con mancuernas", "en": "Dumbbell Bench Press" },
+      "muscle_group": "chest",
+      "equipment": "dumbbell",
+      "aliases": ["dumbbell bench press", "press con mancuernas", "press pecho mancuernas"]
+    },
+    {
+      "id": "incline_dumbbell_press",
+      "name": { "es": "Press inclinado con mancuernas", "en": "Incline Dumbbell Press" },
+      "muscle_group": "chest",
+      "equipment": "dumbbell",
+      "aliases": ["incline dumbbell press", "press inclinado mancuernas"]
+    },
+    {
+      "id": "chest_fly_dumbbell",
+      "name": { "es": "Aperturas con mancuernas", "en": "Dumbbell Chest Fly" },
+      "muscle_group": "chest",
+      "equipment": "dumbbell",
+      "aliases": ["dumbbell fly", "chest fly", "aperturas pecho", "fly con mancuernas"]
+    },
+    {
+      "id": "cable_chest_fly",
+      "name": { "es": "Aperturas en polea", "en": "Cable Chest Fly" },
+      "muscle_group": "chest",
+      "equipment": "cable",
+      "aliases": ["cable fly", "crossover", "aperturas polea", "cable crossover"]
+    },
+    {
+      "id": "machine_chest_press",
+      "name": { "es": "Press de pecho en máquina", "en": "Machine Chest Press" },
+      "muscle_group": "chest",
+      "equipment": "machine",
+      "aliases": ["machine chest press", "press pecho maquina"]
+    },
+    {
+      "id": "push_up",
+      "name": { "es": "Flexiones", "en": "Push Up" },
+      "muscle_group": "chest",
+      "equipment": "bodyweight",
+      "aliases": ["push up", "pushups", "flexiones"]
+    },
+
+    {
+      "id": "lat_pulldown",
+      "name": { "es": "Jalón al pecho", "en": "Lat Pulldown" },
+      "muscle_group": "back",
+      "equipment": "cable",
+      "aliases": ["lat pulldown", "jalon al pecho", "jalón al pecho"]
+    },
+    {
+      "id": "pull_up",
+      "name": { "es": "Dominadas", "en": "Pull Up" },
+      "muscle_group": "back",
+      "equipment": "bodyweight",
+      "aliases": ["pull up", "pullups", "dominadas"]
+    },
+    {
+      "id": "barbell_row",
+      "name": { "es": "Remo con barra", "en": "Barbell Row" },
+      "muscle_group": "back",
+      "equipment": "barbell",
+      "aliases": ["barbell row", "remo barra", "bent over row"]
+    },
+    {
+      "id": "dumbbell_row",
+      "name": { "es": "Remo con mancuerna", "en": "Dumbbell Row" },
+      "muscle_group": "back",
+      "equipment": "dumbbell",
+      "aliases": ["dumbbell row", "remo mancuerna"]
+    },
+    {
+      "id": "seated_cable_row",
+      "name": { "es": "Remo en polea sentado", "en": "Seated Cable Row" },
+      "muscle_group": "back",
+      "equipment": "cable",
+      "aliases": ["seated row", "cable row", "remo polea"]
+    },
+    {
+      "id": "t_bar_row",
+      "name": { "es": "Remo en T", "en": "T Bar Row" },
+      "muscle_group": "back",
+      "equipment": "barbell",
+      "aliases": ["t bar row", "remo t"]
+    },
+    {
+      "id": "straight_arm_pulldown",
+      "name": { "es": "Pulldown con brazos rectos", "en": "Straight Arm Pulldown" },
+      "muscle_group": "back",
+      "equipment": "cable",
+      "aliases": ["straight arm pulldown", "pulldown brazos rectos"]
+    },
+
+    {
+      "id": "barbell_curl",
+      "name": { "es": "Curl con barra", "en": "Barbell Curl" },
+      "muscle_group": "biceps",
+      "equipment": "barbell",
+      "aliases": ["barbell curl", "curl barra"]
+    },
+    {
+      "id": "dumbbell_curl",
+      "name": { "es": "Curl con mancuernas", "en": "Dumbbell Curl" },
+      "muscle_group": "biceps",
+      "equipment": "dumbbell",
+      "aliases": ["dumbbell curl", "curl mancuernas"]
+    },
+    {
+      "id": "hammer_curl",
+      "name": { "es": "Curl martillo", "en": "Hammer Curl" },
+      "muscle_group": "biceps",
+      "equipment": "dumbbell",
+      "aliases": ["hammer curl", "curl martillo"]
+    },
+    {
+      "id": "preacher_curl",
+      "name": { "es": "Curl predicador", "en": "Preacher Curl" },
+      "muscle_group": "biceps",
+      "equipment": "machine",
+      "aliases": ["preacher curl", "curl predicador"]
+    },
+    {
+      "id": "cable_curl",
+      "name": { "es": "Curl en polea", "en": "Cable Curl" },
+      "muscle_group": "biceps",
+      "equipment": "cable",
+      "aliases": ["cable curl", "curl polea"]
+    },
+
+    {
+      "id": "tricep_pushdown",
+      "name": { "es": "Extensión de tríceps en polea", "en": "Tricep Pushdown" },
+      "muscle_group": "triceps",
+      "equipment": "cable",
+      "aliases": ["tricep pushdown", "pushdown triceps"]
+    },
+    {
+      "id": "overhead_tricep_extension",
+      "name": { "es": "Extensión de tríceps sobre la cabeza", "en": "Overhead Tricep Extension" },
+      "muscle_group": "triceps",
+      "equipment": "dumbbell",
+      "aliases": ["overhead tricep extension", "extension triceps overhead"]
+    },
+    {
+      "id": "skullcrusher",
+      "name": { "es": "Rompecráneos", "en": "Skullcrusher" },
+      "muscle_group": "triceps",
+      "equipment": "barbell",
+      "aliases": ["skullcrusher", "lying tricep extension"]
+    },
+    {
+      "id": "bench_dips",
+      "name": { "es": "Fondos en banco", "en": "Bench Dips" },
+      "muscle_group": "triceps",
+      "equipment": "bodyweight",
+      "aliases": ["bench dips", "fondos banco"]
+    },
+
+    {
+      "id": "barbell_squat",
+      "name": { "es": "Sentadilla con barra", "en": "Barbell Squat" },
+      "muscle_group": "quadriceps",
+      "equipment": "barbell",
+      "aliases": ["barbell squat", "sentadilla barra"]
+    },
+    {
+      "id": "leg_press",
+      "name": { "es": "Prensa de pierna", "en": "Leg Press" },
+      "muscle_group": "quadriceps",
+      "equipment": "machine",
+      "aliases": ["leg press", "prensa piernas"]
+    },
+    {
+      "id": "leg_extension",
+      "name": { "es": "Extensión de pierna", "en": "Leg Extension" },
+      "muscle_group": "quadriceps",
+      "equipment": "machine",
+      "aliases": ["leg extension", "extension cuadriceps"]
+    },
+    {
+      "id": "walking_lunge",
+      "name": { "es": "Zancadas caminando", "en": "Walking Lunge" },
+      "muscle_group": "quadriceps",
+      "equipment": "dumbbell",
+      "aliases": ["walking lunges", "zancadas"]
+    },
+
+    {
+      "id": "romanian_deadlift",
+      "name": { "es": "Peso muerto rumano", "en": "Romanian Deadlift" },
+      "muscle_group": "hamstrings",
+      "equipment": "barbell",
+      "aliases": ["romanian deadlift", "rdl", "peso muerto rumano"]
+    },
+    {
+      "id": "leg_curl",
+      "name": { "es": "Curl femoral", "en": "Leg Curl" },
+      "muscle_group": "hamstrings",
+      "equipment": "machine",
+      "aliases": ["leg curl", "curl femoral"]
+    },
+    {
+      "id": "seated_leg_curl",
+      "name": { "es": "Curl femoral sentado", "en": "Seated Leg Curl" },
+      "muscle_group": "hamstrings",
+      "equipment": "machine",
+      "aliases": ["seated leg curl"]
+    },
+
+    {
+      "id": "hip_thrust",
+      "name": { "es": "Hip Thrust", "en": "Hip Thrust" },
+      "muscle_group": "glutes",
+      "equipment": "barbell",
+      "aliases": ["hip thrust", "empuje cadera"]
+    },
+    {
+      "id": "glute_bridge",
+      "name": { "es": "Puente de glúteos", "en": "Glute Bridge" },
+      "muscle_group": "glutes",
+      "equipment": "bodyweight",
+      "aliases": ["glute bridge", "puente gluteos"]
+    },
+
+    {
+      "id": "plank",
+      "name": { "es": "Plancha", "en": "Plank" },
+      "muscle_group": "abs",
+      "equipment": "bodyweight",
+      "aliases": ["plank", "plancha"]
+    },
+    {
+      "id": "crunch",
+      "name": { "es": "Crunch abdominal", "en": "Crunch" },
+      "muscle_group": "abs",
+      "equipment": "bodyweight",
+      "aliases": ["crunch", "ab crunch"]
+    },
+    {
+      "id": "hanging_leg_raise",
+      "name": { "es": "Elevaciones de piernas colgado", "en": "Hanging Leg Raise" },
+      "muscle_group": "abs",
+      "equipment": "bodyweight",
+      "aliases": ["hanging leg raise", "leg raises"]
+    },
+
+    {
+      "id": "overhead_press",
+      "name": { "es": "Press militar", "en": "Overhead Press" },
+      "muscle_group": "shoulders",
+      "equipment": "barbell",
+      "aliases": ["overhead press", "military press", "press militar"]
+    },
+    {
+      "id": "dumbbell_shoulder_press",
+      "name": { "es": "Press de hombros con mancuernas", "en": "Dumbbell Shoulder Press" },
+      "muscle_group": "shoulders",
+      "equipment": "dumbbell",
+      "aliases": ["dumbbell shoulder press", "press hombros mancuernas"]
+    },
+    {
+      "id": "lateral_raise",
+      "name": { "es": "Elevaciones laterales", "en": "Lateral Raise" },
+      "muscle_group": "shoulders",
+      "equipment": "dumbbell",
+      "aliases": ["lateral raise", "elevaciones laterales"]
+    },
+    {
+      "id": "front_raise",
+      "name": { "es": "Elevaciones frontales", "en": "Front Raise" },
+      "muscle_group": "shoulders",
+      "equipment": "dumbbell",
+      "aliases": ["front raise", "elevaciones frontales"]
+    },
+    {
+      "id": "face_pull",
+      "name": { "es": "Face Pull", "en": "Face Pull" },
+      "muscle_group": "shoulders",
+      "equipment": "cable",
+      "aliases": ["face pull", "facepull"]
+    }
+  ]
+}
