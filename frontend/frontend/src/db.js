@@ -1,10 +1,7 @@
-// ─────────────────────────────────────────────────────────────
-//  SimpleGym — Capa de persistencia local (IndexedDB) + Sync
-// ─────────────────────────────────────────────────────────────
 
 const DB_NAME = "simplegym";
 const DB_VERSION = 1;
-const API_URL = "http://localhost:3000";
+const API_URL = "https://simplegym.onrender.com";
 
 // ── Token helpers ────────────────────────────────────────────
 export function getToken() {

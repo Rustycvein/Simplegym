@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://simplegym.onrender.com";
 
 // ── LOGIN ────────────────────────────────────────────────────
 export function Login({ onSuccess, goToRegister }) {

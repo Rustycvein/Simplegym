@@ -16,7 +16,7 @@ import {
 } from './db.js'
 import { Login, Register } from './Auth.jsx'
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://simplegym.onrender.com";
 
 function App() {
   // AUTH
