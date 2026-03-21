@@ -1,6 +1,3 @@
-Gemini dijo
-Aquí tienes un README sobrio y técnico para la carpeta del frontend. Es ideal para colocarlo dentro de frontend/README.md.
-
 SimpleGym Frontend
 Este es el cliente de la aplicación SimpleGym, desarrollado con React y Vite. La interfaz está diseñada siguiendo un concepto de alta fidelidad para la gestión de entrenamientos en tiempo real.
 
