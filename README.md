@@ -4,7 +4,7 @@ Este repositorio contiene la solución completa de SimpleGym, dividida en un cli
 
 ## Estructura del Proyecto
 
-* [**Frontend (React + Vite)**](./frontend/README.md): Interfaz de usuario, gestión de entrenamiento y catálogo.
+* [**Frontend (React + Vite)**](./frontend/frontend/README.md): Interfaz de usuario, gestión de entrenamiento y catálogo.
 * [**Backend (Node.js + Express)**](./backend/README.md): API REST y persistencia de datos en JSON.
 
 ## Instalación Rápida
