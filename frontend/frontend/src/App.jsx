@@ -16,7 +16,7 @@ import {
 } from './db.js'
 import { Login, Register } from './Auth.jsx'
 
-const API_URL = "https://simplegym.onrender.com";
+const API_URL = "https://simplegym.onrender.com" || 3000;
 
 function App() {
  
@@ -398,30 +398,40 @@ function App() {
           </div>
         ) : (
           exercises.map((ex) => (
-            <div key={ex.id || ex._id} className="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/20">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-medium text-zinc-200">{ex.name}</h3>
-                <button onClick={() => removeExercise(ex.id || ex._id)} className="text-zinc-800 hover:text-red-900">
-                  <X size={16} />
-                </button>
-              </div>
-              <div className="space-y-3 mb-4">
-                {ex.sets.map((set, index) => (
-                  <div key={set.id} className="flex gap-3 items-center">
-                    <span className="text-zinc-600 font-mono text-[10px] w-4">{index + 1}</span>
-                    <input
-                      type="number" placeholder="Kg" value={set.weight} min="0"
-                      onChange={(e) => updateSetValues(ex.id || ex._id, set.id, 'weight', e.target.value)}
-                      className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-2 text-center text-white outline-none focus:border-zinc-500 text-sm"
-                    />
-                    <input
-                      type="number" placeholder="Reps" value={set.reps} min="0"
-                      onChange={(e) => updateSetValues(ex.id || ex._id, set.id, 'reps', e.target.value)}
-                      className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg py-2 text-center text-white outline-none focus:border-zinc-500 text-sm"
-                    />
-                  </div>
-                ))}
-              </div>
+  <div key={ex.id || ex._id} className="p-4 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/20 w-full box-border">
+    <div className="flex justify-between items-center mb-4 gap-2">
+      <h3 className="text-lg font-medium text-zinc-200 truncate">{ex.name}</h3>
+      <button onClick={() => removeExercise(ex.id || ex._id)} className="text-zinc-600 hover:text-red-900 flex-shrink-0">
+        <X size={16} />
+      </button>
+    </div>
+
+    <div className="space-y-3 mb-4">
+      {ex.sets.map((set, index) => (
+        <div key={set.id} className="flex gap-2 sm:gap-3 items-center w-full">
+          <span className="text-zinc-600 font-mono text-[10px] w-4 flex-shrink-0 text-center">
+            {index + 1}
+          </span>
+          <input
+            type="number"
+            placeholder="Kg"
+            value={set.weight}
+            min="0"
+            onChange={(e) => updateSetValues(ex.id || ex._id, set.id, 'weight', e.target.value)}
+            className="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 rounded-lg py-2.5 text-center text-white outline-none focus:border-zinc-500 text-sm"
+          />
+
+          <input
+            type="number"
+            placeholder="Reps"
+            value={set.reps}
+            min="0"
+            onChange={(e) => updateSetValues(ex.id || ex._id, set.id, 'reps', e.target.value)}
+            className="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 rounded-lg py-2.5 text-center text-white outline-none focus:border-zinc-500 text-sm"
+          />
+        </div>
+      ))}
+    </div>
               <button
                 onClick={() => addSet(ex.id || ex._id)}
                 className="w-full py-3 rounded-xl bg-zinc-950/50 border border-zinc-900 text-zinc-600 text-[10px] uppercase font-bold tracking-widest flex items-center justify-center gap-2 hover:text-zinc-400"
@@ -432,8 +442,6 @@ function App() {
           ))
         )}
       </div>
-
-      
       {showCatalog && (
         <div className="fixed inset-0 bg-black/98 z-[110] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
