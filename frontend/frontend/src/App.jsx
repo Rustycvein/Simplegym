@@ -19,8 +19,8 @@ import { Login, Register } from './Auth.jsx'
 const API_URL = "https://simplegym.onrender.com";
 
 function App() {
-  // AUTH
-  const [authPage, setAuthPage] = useState(() => getToken() ? null : 'login'); // null = authenticated
+ 
+  const [authPage, setAuthPage] = useState(() => getToken() ? null : 'login'); 
   const [currentUser, setCurrentUser] = useState(null);
 
   const handleAuthSuccess = async (token, user) => {
@@ -68,7 +68,7 @@ function App() {
   const [showRoutineCatalog, setShowRoutineCatalog] = useState(false);
   const [routineSearchTerm, setRoutineSearchTerm] = useState("");
 
-  // ── Cargar catálogo del servidor ─────────────────────────────
+  
   useEffect(() => {
     const fetchCatalog = async () => {
       try {
@@ -343,15 +343,18 @@ function App() {
   );
 
   return (
-    <div className="flex-1 flex flex-col p-6 pb-52 max-w-[1126px] mx-auto min-h-screen">
-      <header className="flex justify-between items-center mb-10">
-        <h1 className="text-2xl font-bold tracking-tighter text-white uppercase italic">SimpleGym</h1>
+    <div className="flex-1 flex flex-col p-5 pb-50 max-w-[1126px]">
+      <header className="flex flex-col items-center mb-1">
+        <div className='flex items-center gap-2'>
+           <h1 className="text-2xl font-bold tracking-tighter text-white uppercase italic">SimpleGym</h1>
+        <img src="/logo.svg" alt='logo' className='w-7 h-7 '/>
+        </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleManualSync}
             disabled={!isOnline || syncing}
             title={isOnline ? "Sincronizar" : "Sin conexión"}
-            className="flex items-center gap-1.5 text-[9px] font-mono uppercase px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 disabled:cursor-default transition-colors"
+            className="flex items-center gap-1.5 text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 disabled:cursor-default transition-colors"
           >
             {isOnline
               ? <Wifi size={10} className={syncing ? "text-yellow-500 animate-pulse" : "text-green-500"}/>
@@ -364,19 +367,19 @@ function App() {
               <span className="bg-yellow-500 text-black text-[8px] font-black px-1 rounded-full">{pendingCount}</span>
             )}
           </button>
-          <div className="text-zinc-500 text-[10px] font-mono bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800 uppercase">
+          <div className="text-zinc-500 text-[12px] font-mono bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800 uppercase">
             {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
           </div>
           <button
             onClick={handleLogout}
-            className="text-zinc-600 hover:text-zinc-300 text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 transition-colors"
+            className="text-zinc-600 hover:text-zinc-300 text-[12px] font-mono uppercase px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 transition-colors"
           >
             Salir
           </button>
         </div>
       </header>
 
-      <div className="grid grid-cols-3 gap-3 mb-10">
+      <div className="grid grid-cols-3 gap-2 mt-3 mb-10 ">
         <ActionButton icon={<Pencil size={16}/>} label="Rutina" onClick={() => setShowRoutines(true)} />
         <ActionButton icon={<Plus size={16}/>} label="Añadir" onClick={() => setShowCatalog(true)} />
         <ActionButton icon={<Clock size={16}/>} label="Historial" onClick={openHistory} />
@@ -571,8 +574,8 @@ function App() {
             />
             <div className="space-y-2 mb-6">
               {routineExercises.length === 0 ? (
-                <div className="py-10 text-center border-2 border-dashed border-zinc-900 rounded-2xl">
-                  <p className="text-zinc-700 text-[10px] uppercase font-mono">Añade ejercicios a la rutina</p>
+                <div className="py-8 text-center border-2 border-dashed border-zinc-900 rounded-2xl">
+                  <p className="text-zinc-400 text-[11px] uppercase font-mono">Añade ejercicios a la rutina</p>
                 </div>
               ) : (
                 routineExercises.map((ex, index) => (

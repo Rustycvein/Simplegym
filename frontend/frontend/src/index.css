@@ -5,6 +5,7 @@ body {
 }
 
 :root {
+  
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -70,6 +71,7 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+
 }
 
 h1,
@@ -84,7 +86,7 @@ h1 {
   letter-spacing: -1.68px;
   margin: 32px 0;
   @media (max-width: 1024px) {
-    font-size: 36px;
+    font-size: 30px;
     margin: 20px 0;
   }
 }

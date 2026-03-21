@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const API_URL = "https://simplegym.onrender.com";
 
-// ── LOGIN ────────────────────────────────────────────────────
 export function Login({ onSuccess, goToRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -104,7 +103,6 @@ export function Register({ onSuccess, goToLogin }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
 
-      // Login automático tras registro
       const loginRes = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
