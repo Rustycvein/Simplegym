@@ -1,21 +1,15 @@
-export class GetExercises {
-    constructor(exerciseRepository) {
-        this.exerciseRepository = exerciseRepository;
+export class GetExercisesUseCase {
+    constructor({ catalogRepository, userExerciseRepository }) {
+        this.catalogRepository = catalogRepository;
+        this.userExerciseRepository = userExerciseRepository;
     }
 
-    async execute(searchTerm = "") {
-        const allExercises = await this.exerciseRepository.findAll();
-        
-        if (!searchTerm) return allExercises;
+    async execute(userId) {
+        const [globalExercises, userExercises] = await Promise.all([
+            this.catalogRepository.findAll(),
+            this.userExerciseRepository.findAll(userId),
+        ]);
 
-        const term = searchTerm.toLowerCase().trim();
-
-        return allExercises.filter(ex => {
-            const matchName = ex.name.es.toLowerCase().includes(term) || 
-                              ex.name.en.toLowerCase().includes(term);
-            const matchAlias = ex.aliases.some(alias => alias.toLowerCase().includes(term));
-            
-            return matchName || matchAlias;
-        });
+        return [...globalExercises, ...userExercises];
     }
 }

@@ -15,7 +15,9 @@ import {
   promisify,
 } from '../db.js'
 
-const API_URL = "https://simplegym.onrender.com";
+const API_URL = window.location.hostname === 'localhost' 
+  ? "http://localhost:3000" 
+  : "https://simplegym.onrender.com";
 
 function GymApp({ onLogout }) {
   const [exercises, setExercises] = useState([]);
@@ -160,6 +162,38 @@ function GymApp({ onLogout }) {
     setSearchTerm("");
   };
 
+  const createExercise = async (name) => {
+  try {
+    const res = await fetch(`${API_URL}/api/exercises`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`
+      },
+      body: JSON.stringify({
+        name: {
+          es: name,
+          en: name
+        },
+        muscle_group: "other", // 🔥 IMPORTANTE (puedes cambiar luego)
+        equipment: "unknown",
+        aliases: []
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error);
+
+    // 👇 tu backend devuelve el ejercicio directo, NO {exercise: ...}
+    setCatalog(prev => [...prev, data]);
+
+  } catch (err) {
+    console.error("Error creando ejercicio:", err);
+    alert("Error al crear ejercicio");
+  }
+};
+
   const addSet = (exerciseId) => {
     setExercises(prev => prev.map(ex => {
       if ((ex.id || ex._id) === exerciseId) {
@@ -178,6 +212,20 @@ function GymApp({ onLogout }) {
       return ex;
     }));
   };
+
+  const toggleSetDone = (exId, setId) => {
+  setExercises(prev => prev.map(ex => {
+    if ((ex.id || ex._id) === exId) {
+      return {
+        ...ex,
+        sets: ex.sets.map(s =>
+          s.id === setId ? { ...s, done: !s.done } : s
+        )
+      };
+    }
+    return ex;
+  }));
+};
 
   const removeExercise = (exId) => {
     setExercises(exercises.filter(ex => (ex.id || ex._id) !== exId));
@@ -363,20 +411,53 @@ function GymApp({ onLogout }) {
               </div>
               <div className="space-y-3 mb-4">
                 {ex.sets.map((set, index) => (
-                  <div key={set.id} className="flex gap-2 sm:gap-3 items-center w-full">
-                    <span className="text-zinc-600 font-mono text-[10px] w-4 flex-shrink-0 text-center">{index + 1}</span>
-                    <input
-                      type="number" placeholder="Kg" value={set.weight} min="0"
-                      onChange={(e) => updateSetValues(ex.id || ex._id, set.id, 'weight', e.target.value)}
-                      className="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 rounded-lg py-2.5 text-center text-white outline-none focus:border-zinc-500 text-sm"
-                    />
-                    <input
-                      type="number" placeholder="Reps" value={set.reps} min="0"
-                      onChange={(e) => updateSetValues(ex.id || ex._id, set.id, 'reps', e.target.value)}
-                      className="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 rounded-lg py-2.5 text-center text-white outline-none focus:border-zinc-500 text-sm"
-                    />
-                  </div>
-                ))}
+  <div
+    key={set.id}
+    className={`flex gap-2 sm:gap-3 items-center w-full transition-all ${
+      set.done ? "opacity-40" : ""
+    }`}
+  >
+    <span className="text-zinc-600 font-mono text-[10px] w-4 flex-shrink-0 text-center">
+      {index + 1}
+    </span>
+
+    <input
+      type="number"
+      placeholder="Kg"
+      value={set.weight}
+      min="0"
+      disabled={set.done}
+      onChange={(e) =>
+        updateSetValues(ex.id || ex._id, set.id, 'weight', e.target.value)
+      }
+      className="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 rounded-lg py-2.5 text-center text-white outline-none focus:border-zinc-500 text-sm disabled:opacity-50"
+    />
+
+    <input
+      type="number"
+      placeholder="Reps"
+      value={set.reps}
+      min="0"
+      disabled={set.done}
+      onChange={(e) =>
+        updateSetValues(ex.id || ex._id, set.id, 'reps', e.target.value)
+      }
+      className="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 rounded-lg py-2.5 text-center text-white outline-none focus:border-zinc-500 text-sm disabled:opacity-50"
+    />
+
+    {/* 🔥 BOTÓN LISTO */}
+    <button
+      onClick={() => toggleSetDone(ex.id || ex._id, set.id)}
+      className={`px-3 py-2 rounded-lg text-[10px] font-bold uppercase transition-all ${
+        set.done
+          ? "bg-green-500 text-black"
+          : "bg-zinc-800 text-zinc-400 hover:text-white"
+      }`}
+    >
+      {set.done ? "✓" : "Listo"}
+    </button>
+  </div>
+))}
               </div>
               <button
                 onClick={() => addSet(ex.id || ex._id)}
@@ -394,7 +475,21 @@ function GymApp({ onLogout }) {
         <div className="fixed inset-0 bg-black/98 z-[110] p-6 overflow-y-auto">
           <div className="max-w-[1126px] mx-auto">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-white uppercase italic tracking-tighter">Catálogo</h2>
+             <div className="flex justify-between items-center w-full">
+  <h2 className="text-2xl font-bold text-white uppercase italic tracking-tighter">Catálogo</h2>
+
+  <button
+    onClick={() => {
+      const name = prompt("Nombre del ejercicio:");
+      if (!name) return;
+
+      createExercise(name);
+    }}
+    className="text-[10px] bg-white text-black px-3 py-2 rounded-lg font-bold uppercase"
+  >
+    + Crear
+  </button>
+</div>
               <button onClick={() => { setShowCatalog(false); setSearchTerm(""); }} className="p-2 text-zinc-400 hover:text-white">
                 <X size={24}/>
               </button>

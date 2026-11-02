@@ -1,31 +1,43 @@
 import { Router } from "express";
-import path from "path";
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
+import db from "../../infrastructure/database/sqlite.js";
+import { ExerciseCatalogRepository } from "../../domain/repositories/ExerciseCatalog.repository.js";
 
 const router = Router();
+const repo = new ExerciseCatalogRepository(db);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// GET (ya lo tienes pero ahora desde DB)
+router.get("/", async (req, res) => {
+  try {
+    const exercises = await repo.findAll();
+    res.json(exercises);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-router.get("/", (req, res) => {
-    try {
-        const catalogPath = path.join(__dirname, "../../infrastructure/data/exercise.catalogo.json");
-        
-        console.log("Buscando catálogo en:", catalogPath); 
+// ✅ POST - crear ejercicio
+router.post("/", async (req, res) => {
+  try {
+    const { name, muscle_group, equipment, aliases } = req.body;
 
-        const data = JSON.parse(readFileSync(catalogPath, "utf-8"));
-        
-        const exercises = data.exercises || data;
-        res.json(exercises);
-    } catch (error) {
-        console.error("Error en catálogo:", error);
-        res.status(500).json({ 
-            error: "No se pudo leer el catálogo", 
-            details: error.message,
-            pathAttempted: error.path 
-        });
+    if (!name?.es || !muscle_group) {
+      return res.status(400).json({
+        error: "Nombre (es) y muscle_group son obligatorios"
+      });
     }
+
+    const newExercise = await repo.create({
+      name,
+      muscle_group,
+      equipment,
+      aliases
+    });
+
+    res.status(201).json(newExercise);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 export default router;
